@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-let countdown = 1800; // 30 minutes in seconds
+let countdown = 10; // 30 minutes in seconds
 
 // Get the start time
 const startDate = new Date();
@@ -55,7 +55,7 @@ const interval = setInterval(() => {
 
     // Run the media player
     exec(
-      '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe" "C:\\Users\\ganesh.nr\\Documents\\Batch\\assets\\timeout.mp3"'
+      '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe" "C:\\Users\\ganesh.nr\\Documents\\Batch\\assets\\timeout-message-v2.m4a"'
     );
 
     console.log("\nTimer done!");
