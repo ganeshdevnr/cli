@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
-let countdown = 10; // 30 minutes countdown
+let countdown = 60 * 30; // 30 minutes countdown
 
 const startDate = new Date();
 const startTime = formatTime(startDate);
