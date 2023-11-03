@@ -1,47 +1,44 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal
 
-
-:: Menu Options
-set "options=personal office"
-set "selected=personal"
-
-:menu
-cls
-echo Choose an option:
-echo [1] Personal
-echo [2] Office
-
-choice /c 12 /n /m "Select an option (1/2): "
-if errorlevel 2 (
-    set "selected=office"
-) else if errorlevel 1 (
-    set "selected=personal"
+:: Check for the command line argument
+if "%~1"=="" (
+    echo Usage: %0 [personal/office]
+    exit /b 1
 )
 
-:: Confirm the selection
-echo You've selected: !selected!
-choice /c yn /m "Are you sure you want to proceed? (y/n): "
-if errorlevel 2 goto :menu
+:: Set paths for personal and office
+set "personalPath=C:\Users\ganesh.nr\Documents\Obsidian Vault\Personal"
+set "officePath=C:\Users\ganesh.nr\Documents\Obsidian Vault\Office"
 
-goto :end
-
-:end
-if "!selected!"=="personal" (
-    cd "C:\Users\ganesh.nr\Documents\Obsidian Vault\Personal"
-) else if "!selected!"=="office" (
-    cd "C:\Users\ganesh.nr\Documents\Obsidian Vault\Office"
+:: Determine the selected option based on the command-line argument
+if /i "%~1"=="personal" (
+    set "repoPath=%personalPath%"
+) else if /i "%~1"=="office" (
+    set "repoPath=%officePath%"
+) else (
+    echo Invalid argument. Use 'personal' or 'office'.
+    exit /b 1
 )
 
-echo Performing daily backup in "!selected!" directory...
+:: Check if git is available
+where git >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    echo 'git' command is not available. Please check if Git is installed and added to PATH.
+    exit /b 1
+)
 
+:: Perform the backup in the selected directory
+echo Performing daily backup in the %~1 repository...
+cd /d "%repoPath%" || (
+    echo Failed to change directory to %repoPath%
+    exit /b 1
+)
+
+:: Executing Git commands
 git add .
 git commit -m "daily backup"
 git push
 
-:: Reset text color to default
-color
-
 echo Backup completed successfully.
-pause
 endlocal
