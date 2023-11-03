@@ -2,9 +2,8 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-let countdown = 10; // 30 minutes in seconds
+let countdown = 60 * 30; // Just using 10 seconds for testing, you can change it back to 30 mins
 
-// Get the start time
 const startDate = new Date();
 const startTime = `${startDate.getFullYear()}${String(
   startDate.getMonth() + 1
@@ -12,7 +11,6 @@ const startTime = `${startDate.getFullYear()}${String(
   .toTimeString()
   .substr(0, 8)}`;
 
-// Define the log file path
 const logDir = "C:\\Users\\ganesh.nr\\Documents\\Batch\\logs\\focus";
 const logFile = path.join(
   logDir,
@@ -22,7 +20,6 @@ const logFile = path.join(
   )}${String(startDate.getDate()).padStart(2, "0")}.txt`
 );
 
-// Create the log directory if it doesn't exist
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir, { recursive: true });
 }
@@ -42,7 +39,6 @@ const interval = setInterval(() => {
   if (countdown < 0) {
     clearInterval(interval);
 
-    // Get the end time
     const endDate = new Date();
     const endTime = `${endDate.getFullYear()}${String(
       endDate.getMonth() + 1
@@ -50,14 +46,28 @@ const interval = setInterval(() => {
       .toTimeString()
       .substr(0, 8)}`;
 
-    // Log the start and end time
     fs.appendFileSync(logFile, `${startTime}, ${endTime}\n`);
+
+    console.log("\nTimer done!\n");
+
+    // Read and "type" the message from the text file
+    const messageFile =
+      "C:\\Users\\ganesh.nr\\Documents\\Batch\\assets\\timeout-message.txt";
+    const message = fs.readFileSync(messageFile, "utf8");
+
+    let charIndex = 0;
+    const typeInterval = setInterval(() => {
+      process.stdout.write(message[charIndex]);
+      charIndex++;
+
+      if (charIndex >= message.length) {
+        clearInterval(typeInterval);
+      }
+    }, 50); // typing speed - 100ms per character
 
     // Run the media player
     exec(
       '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe" "C:\\Users\\ganesh.nr\\Documents\\Batch\\assets\\timeout-message-v2.m4a"'
     );
-
-    console.log("\nTimer done!");
   }
 }, 1000);
