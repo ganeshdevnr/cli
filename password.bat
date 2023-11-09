@@ -9,6 +9,9 @@ if not exist "!destFolder!" mkdir "!destFolder!"
 set /p "length=Enter password length (Default is 12): "
 if "%length%"=="" set "length=12"
 
+:: User input for password purpose
+set /p "purpose=Enter the purpose for this password: "
+
 :: Checkbox selections with default y
 set /p "uppercase=Include Uppercase letters (y/n, default is y)? "
 if "%uppercase%"=="" set "uppercase=y"
@@ -42,6 +45,6 @@ for /l %%i in (1,1,%length%) do (
 )
 
 echo Generated password: !password!
-echo !password! >> "!destFolder!\passwords.csv"
-echo Password saved to "!destFolder!\passwords.csv"
+echo !purpose! !password! >> "!destFolder!\passwords.txt"
+echo Password for '!purpose!' saved to "!destFolder!\passwords.txt"
 pause
