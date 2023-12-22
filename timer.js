@@ -3,12 +3,24 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
-let countdown = 60 * 30; // 30 minutes countdown
+// Determine the countdown length based on the command line argument
+const lengthArg = process.argv[2]; // Command line argument for length
+let countdown;
+switch (lengthArg) {
+  case "short":
+    countdown = 60 * 15; // 15 minutes
+    break;
+  case "long":
+    countdown = 60 * 45; // 45 minutes
+    break;
+  default:
+    countdown = 60 * 30; // Default to 30 minutes
+}
 
 const startDate = new Date();
 const startTime = formatTime(startDate);
 
-const logDir = "C:\\Users\\ganesh.nr\\Documents\\Batch\\logs\\focus";
+const logDir = "C:\\github\\cli\\logs\\focus";
 const logFile = path.join(logDir, `${formatDate(startDate)}.txt`);
 
 ensureDirectoryExists(logDir);
