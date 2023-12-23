@@ -3,9 +3,10 @@ cd C:\github\cli
 
 REM Check if an argument was provided. If not, default to 'medium'
 IF "%1"=="" (
-    node timer.js medium
+    call node timer.js medium
 ) ELSE (
-    node timer.js %1
+    call node timer.js %1
 )
 
-exit
+REM The script will pause here, waiting for user input before closing
+pause

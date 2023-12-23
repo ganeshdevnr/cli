@@ -123,7 +123,7 @@ function finishTimer() {
 
 function displayMessage() {
   const messageFile =
-    "C:\\Users\\ganesh.nr\\Documents\\Batch\\assets\\timeout-message.txt";
+    "C:\\github\\cli\\assets\\timeout-message.txt";
   if (fs.existsSync(messageFile)) {
     const message = fs.readFileSync(messageFile, "utf8");
 
@@ -144,13 +144,12 @@ function displayMessage() {
 
 function playEndSound() {
   const playerCommand =
-    '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe" "C:\\Users\\ganesh.nr\\Documents\\Batch\\assets\\timeout-message-v2.m4a"';
+    '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe" "C:\\github\\cli\\assets\\timeout-message-v2.m4a"';
 
   exec(playerCommand, (error, stdout, stderr) => {
     if (error) {
       console.error("Error playing the end sound:", error);
     }
-    // After the player has closed, we terminate the script
     process.exit();
   });
 }
