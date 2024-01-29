@@ -8,8 +8,8 @@ if "%~1"=="" (
 )
 
 :: Set paths for personal and office
-set "personalPath=C:\Users\ganesh.nr\Documents\Obsidian Vault\Personal"
-set "officePath=C:\Users\ganesh.nr\Documents\Obsidian Vault\Office"
+set "personalPath=C:\github\Personal_Vault"
+set "officePath=C:\github\Office_Vault""
 
 :: Determine the selected option based on the command-line argument
 if /i "%~1"=="personal" (

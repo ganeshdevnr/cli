@@ -5,10 +5,8 @@ const path = require("path");
 const word = process.argv[2];
 const logDir = path.join(
   "C:",
-  "Users",
-  "ganesh.nr",
-  "Documents",
-  "Batch",
+  "Github",
+  "CLI",
   "logs",
   "dictionary"
 );
