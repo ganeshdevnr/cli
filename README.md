@@ -93,8 +93,14 @@ PASSWORD_OUTPUT_DIR=C:\path\to\passwords
 ## 🎯 Usage Examples
 
 ```bash
+# Show help for focus timer
+bin\focus.bat --help
+
 # Start a 30-minute focus session
 bin\focus.bat
+
+# Start a 15-minute short session
+bin\focus.bat short
 
 # Look up a word
 bin\lookup.bat serendipity

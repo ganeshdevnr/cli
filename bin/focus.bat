@@ -8,6 +8,3 @@ IF "%1"=="" (
 ) ELSE (
     call node tools/focus-timer/index.js %1
 )
-
-REM The script will pause here, waiting for user input before closing
-pause

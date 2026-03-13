@@ -3,8 +3,48 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
-// Determine the countdown length based on the command line argument
+// Show help message
+function showHelp() {
+  console.log(`
+🎯 Focus Timer - Productivity Timer with Audio Notification
+
+USAGE:
+  focus [duration]
+
+DURATION OPTIONS:
+  short      15 minutes focus session
+  medium     30 minutes focus session (default)
+  long       45 minutes focus session
+
+EXAMPLES:
+  focus              Start a 30-minute session (default)
+  focus short        Start a 15-minute session
+  focus long         Start a 45-minute session
+
+DURING SESSION:
+  p                  Pause the timer
+  r                  Resume the timer
+  Ctrl+C             Stop and exit
+
+LOGS:
+  Sessions are logged to: logs/focus/YYYYMMDD.txt
+  View summary with: bin\\summary.bat
+
+HELP:
+  focus --help       Show this help message
+  focus -h           Show this help message
+`);
+  process.exit(0);
+}
+
+// Check for help flag
 const lengthArg = process.argv[2]; // Command line argument for length
+
+if (lengthArg === "--help" || lengthArg === "-h" || lengthArg === "help") {
+  showHelp();
+}
+
+// Determine the countdown length based on the command line argument
 let countdown;
 switch (lengthArg) {
   case "short":
@@ -13,8 +53,16 @@ switch (lengthArg) {
   case "long":
     countdown = 60 * 45; // 45 minutes
     break;
-  default:
+  case "medium":
+  case undefined:
+  case null:
+  case "":
     countdown = 60 * 30; // Default to 30 minutes
+    break;
+  default:
+    console.log(`\n⚠️  Unknown duration: "${lengthArg}"`);
+    console.log(`Use 'short', 'medium', or 'long'. Run 'focus --help' for more info.\n`);
+    process.exit(1);
 }
 
 const startDate = new Date();

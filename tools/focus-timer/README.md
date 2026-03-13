@@ -14,8 +14,12 @@ A productivity timer that runs for configurable durations and plays an audio not
 
 From repository root or via PATH:
 ```bash
+# Show help and available options
+bin\focus.bat --help
+
 # Default duration (30 minutes)
 bin\focus.bat
+bin\focus.bat medium
 
 # Short session (15 minutes)
 bin\focus.bat short
