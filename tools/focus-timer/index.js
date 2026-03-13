@@ -20,7 +20,9 @@ switch (lengthArg) {
 const startDate = new Date();
 const startTime = formatTime(startDate);
 
-const logDir = path.join(__dirname, "logs", "focus");
+// Repository root is two levels up from this file (tools/focus-timer/)
+const repoRoot = path.join(__dirname, "..", "..");
+const logDir = path.join(repoRoot, "logs", "focus");
 const logFile = path.join(logDir, `${formatDate(startDate)}.txt`);
 
 ensureDirectoryExists(logDir);

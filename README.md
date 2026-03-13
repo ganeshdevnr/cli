@@ -1,65 +1,124 @@
-# CLI Timer Application
+# CLI Tools Collection
 
-A simple, portable timer application that runs for configurable durations (15, 30, or 45 minutes) and plays a recorded message when complete.
+A collection of portable, productivity-focused CLI tools for Windows. All tools are modular, well-organized, and completely portable - no hardcoded paths!
 
-## Features
+## 🚀 Quick Start
 
-- Configurable timer durations (short: 15 min, medium: 30 min, long: 45 min)
-- Pause/resume functionality
-- Automatic logging of focus sessions
-- Audio notification with custom message when timer completes
-- Fully portable - no hardcoded paths!
-
-## Setup
-
-1. **Clone or download** this repository to any location on your system
+1. **Clone this repository** to any location on your system
 2. **Install dependencies**:
    ```bash
    npm install
    ```
-3. **Optional: Configure media player** (if not using Windows Media Player):
+3. **Add to PATH** (optional but recommended):
+   - Add `<repo-path>\bin` to your system PATH
+   - Access all tools from anywhere!
+4. **Configure** (optional):
    - Copy `.env.example` to `.env`
-   - Set `MEDIA_PLAYER_PATH` to your preferred media player
+   - Set environment variables for your preferences
 
-## Usage
+## 📦 Available Tools
 
-Simply run the batch file from anywhere:
+| Tool | Command | Description |
+|------|---------|-------------|
+| **Focus Timer** | `bin\focus.bat [duration]` | Productivity timer with audio notification |
+| **Dictionary** | `bin\lookup.bat [word]` | Quick Cambridge Dictionary lookup |
+| **Backup** | `bin\backup.bat [vault]` | Git backup automation for vaults |
+| **Password Gen** | `bin\password.bat` | Secure password generator |
+| **PKM Launcher** | `bin\pkm.bat [vault]` | Quick Obsidian vault launcher |
+| **Time Summary** | `bin\summary.bat` | Calculate today's focus time |
 
-```bash
-# Run with default duration (30 minutes)
-focus.bat
+## 📖 Detailed Documentation
 
-# Run with short duration (15 minutes)
-focus.bat short
+Each tool has its own README with detailed usage instructions:
 
-# Run with long duration (45 minutes)
-focus.bat long
-```
+- [Focus Timer](tools/focus-timer/README.md)
+- [Dictionary Lookup](tools/dictionary/README.md)
+- [Backup Tool](tools/backup/README.md)
+- [Password Generator](tools/password-gen/README.md)
+- [PKM Launcher](tools/pkm-launcher/README.md)
+- [Time Summary](tools/time-summary/README.md)
 
-### During Timer:
-- Press `p` to pause
-- Press `r` to resume
-- Press `Ctrl+C` to exit
-
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 cli/
-├── focus.bat              # Main launcher script
-├── timer.js               # Timer application logic
-├── assets/                # Audio and message files
-│   ├── timeout-message.txt
-│   └── timeout-message-v2.m4a
-└── logs/focus/            # Session logs (auto-created)
+├── bin/                          # Root launchers (add to PATH)
+│   ├── focus.bat
+│   ├── backup.bat
+│   ├── lookup.bat
+│   ├── password.bat
+│   ├── pkm.bat
+│   └── summary.bat
+│
+├── tools/                        # Individual tool implementations
+│   ├── focus-timer/
+│   │   ├── index.js
+│   │   ├── README.md
+│   │   └── assets/
+│   ├── dictionary/
+│   │   ├── index.js
+│   │   └── README.md
+│   ├── backup/
+│   ├── password-gen/
+│   ├── pkm-launcher/
+│   └── time-summary/
+│
+├── logs/                         # Shared logs directory
+│   ├── focus/
+│   └── dictionary/
+│
+├── shared/                       # Shared utilities
+├── archive/                      # Old versions
+├── .env.example                  # Configuration template
+├── package.json
+└── README.md
 ```
 
-## Environment Variables
+## ⚙️ Environment Variables
 
-- `MEDIA_PLAYER_PATH` (optional): Path to your preferred media player executable. Defaults to Windows Media Player if not set.
+Optional configuration via `.env` file:
 
-## How It Works
+```bash
+# Focus Timer - Media Player
+MEDIA_PLAYER_PATH="C:\Program Files\VLC\vlc.exe"
 
-1. The batch file changes to its own directory automatically using `%~dp0`
-2. All paths in the Node.js script are relative to `__dirname`
-3. Logs are automatically created in the `logs/focus/` directory
-4. No manual path configuration needed! 
+# Backup Tool - Vault Paths
+PERSONAL_VAULT_PATH=C:\path\to\Personal_Vault
+OFFICE_VAULT_PATH=C:\path\to\Office_Vault
+
+# Password Generator - Output Directory
+PASSWORD_OUTPUT_DIR=C:\path\to\passwords
+```
+
+## 🎯 Usage Examples
+
+```bash
+# Start a 30-minute focus session
+bin\focus.bat
+
+# Look up a word
+bin\lookup.bat serendipity
+
+# Backup personal vault
+bin\backup.bat personal
+
+# Generate a secure password
+bin\password.bat
+
+# Show today's focus time summary
+bin\summary.bat
+```
+
+## 🔧 Adding New Tools
+
+1. Create new directory in `tools/`
+2. Add launcher script in `bin/`
+3. Update this README
+4. Add tool-specific README
+
+## 📝 Notes
+
+- All tools use relative paths - fully portable!
+- Logs are stored in `logs/` directory
+- Each tool is self-contained and modular
+- Environment variables are optional with sensible defaults 

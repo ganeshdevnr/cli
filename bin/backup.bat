@@ -7,9 +7,13 @@ if "%~1"=="" (
     exit /b 1
 )
 
-:: Set paths for personal and office
-set "personalPath=C:\github\Personal_Vault"
-set "officePath=C:\github\Office_Vault""
+:: Set paths for personal and office (configure via environment variables)
+set "personalPath=%PERSONAL_VAULT_PATH%"
+set "officePath=%OFFICE_VAULT_PATH%"
+
+:: Fallback to default paths if environment variables are not set
+if "%personalPath%"=="" set "personalPath=C:\github\Personal_Vault"
+if "%officePath%"=="" set "officePath=C:\github\Office_Vault""
 
 :: Determine the selected option based on the command-line argument
 if /i "%~1"=="personal" (

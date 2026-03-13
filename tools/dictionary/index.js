@@ -3,15 +3,10 @@ const { exec } = require("child_process");
 const path = require("path");
 
 const word = process.argv[2];
-const logDir = path.join(
-  "C:",
-  "Users",
-  "GaneshNR",
-  "repos",
-  "cli",
-  "logs",
-  "dictionary"
-);
+
+// Repository root is two levels up from this file (tools/dictionary/)
+const repoRoot = path.join(__dirname, "..", "..");
+const logDir = path.join(repoRoot, "logs", "dictionary");
 const logFile = path.join(logDir, "words.json");
 
 async function openDictionary(word) {

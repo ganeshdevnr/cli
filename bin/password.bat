@@ -1,8 +1,9 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: Destination folder
-set "destFolder=C:\Users\ganesh.nr\Documents\Generated Passwords"
+:: Destination folder (use environment variable or default)
+set "destFolder=%PASSWORD_OUTPUT_DIR%"
+if "%destFolder%"=="" set "destFolder=%USERPROFILE%\Documents\Generated Passwords"
 if not exist "!destFolder!" mkdir "!destFolder!"
 
 :: User input for password length with default 12
