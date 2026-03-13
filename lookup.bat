@@ -1,4 +1,4 @@
 @echo off
-cd C:\Github\CLI
+cd C:\Users\GaneshNR\repos\cli
 node .\js\openDictionary.js %*
 exit

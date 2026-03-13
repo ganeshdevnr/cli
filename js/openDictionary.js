@@ -5,8 +5,10 @@ const path = require("path");
 const word = process.argv[2];
 const logDir = path.join(
   "C:",
-  "Github",
-  "CLI",
+  "Users",
+  "GaneshNR",
+  "repos",
+  "cli",
   "logs",
   "dictionary"
 );
@@ -19,7 +21,7 @@ async function openDictionary(word) {
   }
 
   await ensureLogDirExists(logDir);
-  const url = `https://dictionary.cambridge.org/dictionary/english/${word}`;
+  const url = `https://dictionary.cambridge.org/dictionary/english/${word}`; 
 
   try {
     exec(`start chrome "${url}"`);

@@ -20,7 +20,7 @@ switch (lengthArg) {
 const startDate = new Date();
 const startTime = formatTime(startDate);
 
-const logDir = "C:\\github\\cli\\logs\\focus";
+const logDir = path.join(__dirname, "logs", "focus");
 const logFile = path.join(logDir, `${formatDate(startDate)}.txt`);
 
 ensureDirectoryExists(logDir);
@@ -122,8 +122,7 @@ function finishTimer() {
 }
 
 function displayMessage() {
-  const messageFile =
-    "C:\\github\\cli\\assets\\timeout-message.txt";
+  const messageFile = path.join(__dirname, "assets", "timeout-message.txt");
   if (fs.existsSync(messageFile)) {
     const message = fs.readFileSync(messageFile, "utf8");
 
@@ -143,8 +142,11 @@ function displayMessage() {
 }
 
 function playEndSound() {
-  const playerCommand =
-    '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe" "C:\\github\\cli\\assets\\timeout-message-v2.m4a"';
+  // Use environment variable for media player path, with fallback to default Windows Media Player
+  const mediaPlayerPath = process.env.MEDIA_PLAYER_PATH ||
+    '"C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe"';
+  const audioFile = path.join(__dirname, "assets", "timeout-message-v2.m4a");
+  const playerCommand = `${mediaPlayerPath} "${audioFile}"`;
 
   exec(playerCommand, (error, stdout, stderr) => {
     if (error) {
